@@ -72,6 +72,21 @@ public class MenuScreen extends BaseScreen {
     }
 
     @Override
+    public boolean keyDown(int keycode) {
+        switch(keycode){
+            case 66: {
+                game.setScreen(new GameScreen());
+                break;
+            }
+            case 131: {
+                Gdx.app.exit();
+                break;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean touchDown(Vector2 touch, int pointer, int button) {
         buttonExit.touchDown(touch, pointer, button);
         buttonPlay.touchDown(touch, pointer, button);

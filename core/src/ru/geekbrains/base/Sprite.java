@@ -24,12 +24,24 @@ public class Sprite extends Rect {
         setWidth(height * aspect);
     }
 
-    public void update(float delta) {
-
-    }
+    public void update(float delta) {}
 
     public void resize(Rect worldBounds) {
+    }
 
+    public boolean keyDown(int keycode) {
+        System.out.println("keyDown keycode = " + keycode);
+        return false;
+    }
+
+    public boolean keyUp(int keycode) {
+        System.out.println("keyUp keycode = " + keycode);
+        return false;
+    }
+
+    public boolean keyTyped(char character) {
+        System.out.println("keyTyped character = " + character);
+        return false;
     }
 
     public boolean touchDown(Vector2 touch, int pointer, int button) {
