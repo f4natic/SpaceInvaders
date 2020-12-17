@@ -8,7 +8,7 @@ import ru.geekbrains.math.Rect;
 
 public class ButtonExit extends BaseButton {
 
-    private static final float HEIGHT = 0.19f;
+    private static final float HEIGHT = 0.15f;
     private static final float MARGIN = 0.03f;
 
     public ButtonExit(TextureAtlas atlas) {
