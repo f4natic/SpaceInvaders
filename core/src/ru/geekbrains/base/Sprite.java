@@ -103,6 +103,4 @@ public class Sprite extends Rect {
     public void flushDestroy(){
         destroyed = false;
     }
-
-    public void playMusic(){};
 }
