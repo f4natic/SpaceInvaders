@@ -8,7 +8,7 @@ import ru.geekbrains.screen.GameScreen;
 
 public class ButtonPlay extends BaseButton {
 
-    private static final float HEIGHT = 0.24f;
+    private static final float HEIGHT = 0.20f;
     private static final float MARGIN = 0.03f;
 
     private final Game game;
