@@ -42,7 +42,7 @@ public abstract class SpritesPool<T extends Sprite> {
         }
     }
 
-    public void freeAllDestruyedActiveObjects() {
+    public void freeAllDestroyedActiveObjects() {
         for(int i = 0; i < activeObjects.size(); i++) {
             T object = activeObjects.get(i);
             if(object.isDestroyed()) {

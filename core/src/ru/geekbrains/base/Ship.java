@@ -6,11 +6,15 @@ import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.math.Rect;
 import ru.geekbrains.pool.BulletPool;
+import ru.geekbrains.pool.ExplosionPool;
 import ru.geekbrains.sprite.Bullet;
+import ru.geekbrains.sprite.Explosion;
 
 public abstract class Ship extends Sprite {
 
     protected final BulletPool bulletPool;
+    private final ExplosionPool explosionPool;
+
     protected TextureRegion bulletRegion;
     protected Sound bulletSound;
     protected Vector2 bulletSpd;
@@ -27,13 +31,15 @@ public abstract class Ship extends Sprite {
     protected float reloadInterval;
     protected float reloadTimer;
 
-    public Ship(BulletPool bulletPool) {
+    public Ship(BulletPool bulletPool, ExplosionPool explosionPool) {
         this.bulletPool = bulletPool;
+        this.explosionPool = explosionPool;
     }
 
-    public Ship(TextureRegion region, int rows, int cols, int frames, BulletPool bulletPool) {
+    public Ship(TextureRegion region, int rows, int cols, int frames, BulletPool bulletPool, ExplosionPool explosionPool) {
         super(region, rows, cols, frames);
         this.bulletPool = bulletPool;
+        this.explosionPool = explosionPool;
     }
 
     @Override
@@ -46,9 +52,20 @@ public abstract class Ship extends Sprite {
         }
     }
 
+    @Override
+    public void destroy() {
+        super.destroy();
+        boom();
+    }
+
     private void shoot() {
         bulletSound.play(0.25f);
         Bullet bullet = bulletPool.obtain();
         bullet.set(this, bulletRegion, bulletPos, bulletSpd, bulletHeight, worldBounds, damage);
+    }
+
+    private void boom() {
+        Explosion explosion = explosionPool.obtain();
+        explosion.set(this.pos, getHeight());
     }
 }
