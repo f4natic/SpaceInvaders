@@ -25,7 +25,7 @@ public abstract class Ship extends Sprite {
     protected Rect worldBounds;
 
     protected float reloadInterval;
-    private float reloadTimer;
+    protected float reloadTimer;
 
     public Ship(BulletPool bulletPool) {
         this.bulletPool = bulletPool;
@@ -38,11 +38,7 @@ public abstract class Ship extends Sprite {
 
     @Override
     public void update(float delta) {
-        if(pos.y > worldBounds.getTop() - this.getHalfHeight()){
-            pos.mulAdd(spd, delta*10);
-        } else{
-            pos.mulAdd(spd, delta);
-        }
+        pos.mulAdd(spd, delta);
         reloadTimer += delta;
         if(reloadTimer >= reloadInterval){
             reloadTimer = 0.0f;
