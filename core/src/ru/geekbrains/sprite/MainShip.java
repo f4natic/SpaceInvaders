@@ -8,10 +8,11 @@ import com.badlogic.gdx.math.Vector2;
 import ru.geekbrains.base.Ship;
 import ru.geekbrains.math.Rect;
 import ru.geekbrains.pool.BulletPool;
+import ru.geekbrains.pool.ExplosionPool;
 
 public class MainShip extends Ship {
 
-    private static final int HP = 100;
+    private static final int HP = 10;
     private static final float RELOAD_INTERVAL = 0.2f;
     private static final float HEIGHT = 0.15f;
     private static final float BOTTOM_MARGIN = 0.05f;
@@ -23,11 +24,11 @@ public class MainShip extends Ship {
     private int leftPointer = INVALID_POINTER;
     private  int rightPointer = INVALID_POINTER;
 
-    public MainShip(TextureAtlas atlas, BulletPool bulletPool) {
-        super(atlas.findRegion("main_ship"), 1, 2, 2, bulletPool);
+    public MainShip(TextureAtlas atlas, BulletPool bulletPool, ExplosionPool explosionPool) {
+        super(atlas.findRegion("main_ship"), 1, 2, 2, bulletPool, explosionPool);
         bulletRegion = atlas.findRegion("bulletMainShip");
         bulletSound = Gdx.audio.newSound(Gdx.files.internal("sounds\\laser.wav"));
-        bulletSpd = new Vector2(0, 0.25f);
+        bulletSpd = new Vector2(0, 0.5f);
         bulletPos = new Vector2();
         bulletHeight = 0.01f;
         damage = 1;
@@ -140,6 +141,15 @@ public class MainShip extends Ship {
 
     public void dispose(){
         bulletSound.dispose();
+    }
+
+    public boolean isBulletCollision(Bullet bullet) {
+        return !(
+                bullet.getRight() < getLeft()
+                        || bullet.getLeft() > getRight()
+                        || bullet.getBottom() > pos.y
+                        || bullet.getTop() < getBottom()
+        );
     }
 
     private void moveLeft() {
