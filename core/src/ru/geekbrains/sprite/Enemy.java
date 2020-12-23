@@ -27,7 +27,7 @@ public class Enemy extends Ship {
         if(getTop() < worldBounds.getTop()) {
             this.spd.set(spd0);
         } else {
-            reloadTimer  = reloadInterval -delta * 2;
+            reloadTimer  = reloadInterval - delta * 2;
         }
         bulletPos.set(pos.x, pos.y - getHalfHeight());
         if(getBottom() < worldBounds.getBottom()) {
