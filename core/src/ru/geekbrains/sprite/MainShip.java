@@ -163,4 +163,8 @@ public class MainShip extends Ship {
     private void stop() {
         spd.setZero();
     }
+
+    public void setHp(int hp) {
+        this.hp += hp;
+    }
 }
