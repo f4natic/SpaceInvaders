@@ -12,7 +12,7 @@ import ru.geekbrains.sprite.Explosion;
 
 public abstract class Ship extends Sprite {
 
-    private static final float DAMAGE_ANIMATE_INTERVAL = 0.1f;
+    protected static final float DAMAGE_ANIMATE_INTERVAL = 0.1f;
 
     protected final BulletPool bulletPool;
     protected final ExplosionPool explosionPool;
@@ -31,7 +31,7 @@ public abstract class Ship extends Sprite {
 
     protected float reloadInterval;
     protected float reloadTimer;
-    private float damageAnimateTimer;
+    protected float damageAnimateTimer;
 
     public Ship(BulletPool bulletPool, ExplosionPool explosionPool) {
         this.bulletPool = bulletPool;

@@ -12,7 +12,7 @@ import ru.geekbrains.pool.ExplosionPool;
 
 public class MainShip extends Ship {
 
-    private static final int HP = 10;
+    private static final int HP = 1;
     private static final float RELOAD_INTERVAL = 0.2f;
     private static final float HEIGHT = 0.15f;
     private static final float BOTTOM_MARGIN = 0.05f;
@@ -36,6 +36,19 @@ public class MainShip extends Ship {
         spd0 = new Vector2(0.5f, 0);
         reloadInterval = RELOAD_INTERVAL;
         hp = HP;
+        damageAnimateTimer = DAMAGE_ANIMATE_INTERVAL;
+    }
+
+    public void startNewGame() {
+        pressedRight = false;
+        pressedLeft = false;
+        leftPointer = INVALID_POINTER;
+        rightPointer = INVALID_POINTER;
+        stop();
+        this.pos.x = worldBounds.pos.x;
+        hp = HP;
+        flushDestroy();
+        frame = 0;
     }
 
     @Override
@@ -162,9 +175,5 @@ public class MainShip extends Ship {
 
     private void stop() {
         spd.setZero();
-    }
-
-    public void setHp(int hp) {
-        this.hp += hp;
     }
 }
