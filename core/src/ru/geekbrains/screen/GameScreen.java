@@ -23,6 +23,7 @@ import ru.geekbrains.sprite.Enemy;
 import ru.geekbrains.sprite.GameOver;
 import ru.geekbrains.sprite.MainShip;
 import ru.geekbrains.sprite.Star;
+import ru.geekbrains.sprite.TrackingStar;
 import ru.geekbrains.utils.EnemyEmitter;
 import ru.geekbrains.utils.Font;
 
@@ -40,7 +41,7 @@ public class GameScreen extends BaseScreen {
     private Background background;
 
     private TextureAtlas atlas;
-    private Star[] stars;
+    private TrackingStar[] stars;
 
     private BulletPool bulletPool;
     private ExplosionPool explosionPool;
@@ -72,10 +73,6 @@ public class GameScreen extends BaseScreen {
         bg = new Texture("textures/bg.png");
         background = new Background(bg);
         atlas = new TextureAtlas("textures/mainAtlas.tpack");
-        stars = new Star[STAR_COUNT];
-        for (int i = 0; i < STAR_COUNT; i++) {
-            stars[i] = new Star(atlas);
-        }
         bulletPool = new BulletPool();
         explosionSound = Gdx.audio.newSound(Gdx.files.internal("sounds\\explosion.wav"));
         explosionPool = new ExplosionPool(atlas, explosionSound);
@@ -85,6 +82,10 @@ public class GameScreen extends BaseScreen {
         mainShip = new MainShip(atlas, bulletPool, explosionPool);
         gameOver = new GameOver(atlas);
         buttonNewGame = new ButtonNewGame(atlas, this);
+        stars = new TrackingStar[STAR_COUNT];
+        for (int i = 0; i < STAR_COUNT; i++) {
+            stars[i] = new TrackingStar(atlas, mainShip.getSpd());
+        }
         music = Gdx.audio.newMusic(Gdx.files.internal("sounds\\music.mp3"));
         music.setLooping(true);
         music.play();
