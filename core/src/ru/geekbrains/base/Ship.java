@@ -80,6 +80,14 @@ public abstract class Ship extends Sprite {
         return damage;
     }
 
+    public int getHp() {
+        return hp;
+    }
+
+    public Vector2 getSpd() {
+        return spd;
+    }
+
     private void shoot() {
         bulletSound.play(0.25f);
         Bullet bullet = bulletPool.obtain();
